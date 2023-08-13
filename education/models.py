@@ -24,6 +24,8 @@ class Lesson(models.Model):
     description = models.TextField(verbose_name='описание', **NULLABLE)
     link_to_video = models.URLField(verbose_name='ссылка на видео', **NULLABLE)
 
+    courses = models.ManyToManyField(Course, verbose_name='курсы')
+
     def __str__(self):
         return f'{self.title}'
 
