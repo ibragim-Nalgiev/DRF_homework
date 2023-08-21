@@ -4,4 +4,5 @@ Pillow
 ipython
 psycopg2-binary
 djangorestframework
+rest_framework_simplejwt
 
