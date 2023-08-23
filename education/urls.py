@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework import routers
-
+from rest_framework_simplejwt.views import TokenRefreshView
 from education.apps import EducationConfig
 from education.views import *
 
@@ -17,6 +17,9 @@ urlpatterns = [
     path('lesson/delete/<int:pk>/', LessonDeleteAPIView.as_view(), name='lesson_delete'),
     path('lesson/update/<int:pk>/', LessonUpdateAPIView.as_view(), name='lesson_update'),
     path('lesson/create/', LessonCreateAPIView.as_view(), name='lesson_create'),
+    path('course/token/', MyObtainTokenPairView.as_view(), name='course_token'),
+    path('lesson/token/', TokenObtainPairView.as_view(), name='lesson_token'),
+    path('lesson/token/refresh/', TokenRefreshView.as_view(), name='refresh_token'),
 ] + router.urls
 
 
