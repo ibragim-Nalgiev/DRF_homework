@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 
 NULLABLE = {'blank': True, 'null': True}
@@ -36,6 +37,24 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = ' урок'
         verbose_name_plural = 'уроки'
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='subscribed_user', on_delete=models.CASCADE,
+                             related_name='subscribed_user')
+    course = models.ForeignKey(Course, verbose_name='subscription_course', on_delete=models.CASCADE,
+                               related_name='subscription_course')
+    is_subscribed = models.BooleanField(default=False, verbose_name='Подписка осуществлена')
+
+    def __str__(self):
+        return f'{self.user} subscribed to {self.course}'
+
+    class Meta:
+        verbose_name = 'Подписка на курсы'
+        verbose_name_plural = 'Подписки на курсы'
+        ordering = ('course', 'is_subscribed')
+
+
 
 
 
